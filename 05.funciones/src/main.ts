@@ -5,7 +5,7 @@ const marcador = document.getElementById("marcador");
 const siguiente = document.getElementById("siguiente");
 const anterior = document.getElementById("anterior");
 const reset = document.getElementById("reset");
-const numeroPropio = document.getElementById("caja") as HTMLInputElement;
+const numeroPropio = document.getElementById("caja");
 const boton = document.getElementById("acceptar");
 
 //Declarar la funcion principal
@@ -16,21 +16,26 @@ function contador(turno: string): void {
     numeroPropio !== null &&
     numeroPropio !== undefined
   ) {
-    //guardar el H1 del DOM en una variable cambiando el tipo e entero
-    let numeroTurno = parseInt(marcador.innerText);
+    if (
+      numeroPropio instanceof HTMLInputElement &&
+      boton instanceof HTMLButtonElement
+    ) {
+      //guardar el H1 del DOM en una variable cambiando el tipo e entero
+      let numeroTurno = parseInt(marcador.innerText);
 
-    if (turno === "siguiente") {
-      numeroTurno++;
-    } else if (turno === "anterior") {
-      numeroTurno--;
-    } else if (turno === "reset") {
-      numeroTurno = 0;
-    } else if (turno === "aceptar") {
-      numeroTurno = parseInt(numeroPropio.value);
+      if (turno === "siguiente") {
+        numeroTurno++;
+      } else if (turno === "anterior") {
+        numeroTurno--;
+      } else if (turno === "reset") {
+        numeroTurno = 0;
+      } else if (turno === "aceptar") {
+        numeroTurno = parseInt(numeroPropio.value);
+      }
+
+      //mostrar en pantalla el resultado, añadiendo la funcion padStart que añade un 0 delante mientras el numero sea de 1 solo digito
+      marcador.innerText = numeroTurno.toString().padStart(2, "0");
     }
-
-    //mostrar en pantalla el resultado, añadiendo la funcion padStart que añade un 0 delante mientras el numero sea de 1 solo digito
-    marcador.innerText = numeroTurno.toString().padStart(2, "0");
   }
 }
 
