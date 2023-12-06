@@ -151,6 +151,7 @@ const nuevaPartida = (): void => {
   mostrarBotonNuevaPartida(false);
   if (mensajes) {
     mensajes.innerHTML = "";
+    mensajes.classList.remove("error");
   }
 
   //Habilitar botones

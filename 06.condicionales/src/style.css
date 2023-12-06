@@ -6,12 +6,6 @@ h1 {
   color: #ffffff;
 }
 
-#mostrar_puntos {
-  color: #fff;
-  font-weight: bold;
-  font-size: 24px;
-}
-
 .mesa-juego {
   display: flex;
   flex-direction: column;
@@ -22,14 +16,25 @@ h1 {
   color: red;
 }
 
-#mostrar_mensaje {
+.mensaje.error {
+  color: red;
+}
+
+#mostrar_puntos {
   color: #fff;
   font-weight: bold;
   font-size: 24px;
 }
 
+#mostrar_mensaje {
+  color: #fff;
+  font-weight: bold;
+}
+
 #mostrar_mensaje.error {
   color: red;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 :root {
