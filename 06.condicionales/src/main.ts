@@ -12,6 +12,7 @@ const puntuacion = getElemento("mostrar_puntos", "div");
 const mensajes = getElemento("mostrar_mensaje", "div");
 const botonPlantarse = getElemento("plantarse", "button") as HTMLButtonElement;
 const botonNuevaPartida = getElemento("nueva_partida", "button");
+const botonQueHabriaPasado = getElemento("post-plantarse", "button");
 
 // Función para obtener elementos del DOM y hacer comprobaciones
 function getElemento(id: string, tipo: string): HTMLElement {
@@ -107,22 +108,34 @@ function mostrarCarta(carta: number) {
   meteUrl(urlImagen);
 }
 
+//funcion que genera numero aleatorio
+function generarNumero(): number {
+  return Math.floor(Math.random() * 10) + 1;
+}
+
 // Función para obtener una carta aleatoria
 function obtenerCartaAleatoria(): number {
-  let cartaAleatoria: number = Math.floor(Math.random() * 10) + 1;
+  let cartaAleatoria: number = generarNumero();
   if (cartaAleatoria > 7) {
     cartaAleatoria += 2;
   }
   return cartaAleatoria;
 }
 
-// Función para sumar puntos según la carta obtenida
-function sumarPuntos(carta: number) {
+//Funcion para sumar puntos
+function sumaPuntos(carta: number): number {
+  let puntos: number;
   if (carta >= 1 && carta <= 7) {
-    puntuacionUsuario += carta;
+    puntos = carta;
   } else {
-    puntuacionUsuario += 0.5;
+    puntos = 0.5;
   }
+  return puntos;
+}
+
+// Función para meter puntos en puntuacion usuario
+function sumarPuntosUsuario(carta: number) {
+  puntuacionUsuario += sumaPuntos(carta);
 }
 
 // Función para deshabilitar botones
@@ -154,24 +167,42 @@ function mostrarBotonNuevaPartida(mostrar: boolean) {
   }
 }
 
-// Función principal para pedir carta
-function pedirCarta() {
-  const cartaAleatoria = obtenerCartaAleatoria();
-  sumarPuntos(cartaAleatoria);
-  mostrarCarta(cartaAleatoria);
-  muestraPuntuacion();
+// Función para mostrar el botón de que habria pasado
+function mostrarBotonQuePasaria(mostrar: boolean) {
+  if (botonQueHabriaPasado) {
+    botonQueHabriaPasado.style.display = mostrar ? "block" : "none";
+  }
+}
 
+//Funcion para saber que habria pasado
+function verQueHabriaPasado() {
+  pedirCarta();
+}
+
+//funcion para comprobar puntuacion usuario y mostrar mensaje
+function comprobarPuntosUsuario() {
   if (puntuacionUsuario > 7.5) {
     mostrarMensaje("GAME OVER", true);
+    deshabilitarBotones();
+    mostrarBotonNuevaPartida(true);
+  } else if (puntuacionUsuario === 7.5) {
+    mostrarMensaje("¡¡¡Enhorabuena!!!🎉🎉", false);
     deshabilitarBotones();
     mostrarBotonNuevaPartida(true);
   }
 }
 
-// Función para plantarse
-function plantarse() {
-  deshabilitarBotones();
+// Función principal para pedir carta
+function pedirCarta() {
+  const cartaAleatoria = obtenerCartaAleatoria();
+  sumarPuntosUsuario(cartaAleatoria);
+  mostrarCarta(cartaAleatoria);
+  muestraPuntuacion();
+  comprobarPuntosUsuario();
+}
 
+//funcion mostrar mensaje en caso de plantarse
+function mensajePlantarse() {
   let mensaje = "";
   if (puntuacionUsuario < 4) {
     mensaje = "Has sido muy conservador💩";
@@ -182,17 +213,20 @@ function plantarse() {
   } else if (puntuacionUsuario === 7.5) {
     mensaje = "¡Lo has clavado! ¡Enhorabuena!🎉🎉";
   }
-
-  mostrarMensaje(mensaje);
-  mostrarBotonNuevaPartida(true);
+  return mensaje;
 }
 
-// Función para iniciar nueva partida
-function nuevaPartida() {
-  puntuacionUsuario = 0;
-  muestraPuntuacion();
-  mostrarCarta(0);
-  mostrarBotonNuevaPartida(false);
+// Función para plantarse
+function plantarse() {
+  deshabilitarBotones();
+  const mensaje = mensajePlantarse();
+  mostrarMensaje(mensaje);
+  mostrarBotonNuevaPartida(true);
+  mostrarBotonQuePasaria(true);
+}
+
+//funciona para establecer ajustes de nueva partida
+function ajustesNuevaPartida() {
   if (mensajes) {
     mensajes.innerHTML = "";
     mensajes.classList.remove("error");
@@ -206,18 +240,31 @@ function nuevaPartida() {
   }
 }
 
+// Función para iniciar nueva partida
+function nuevaPartida() {
+  puntuacionUsuario = 0;
+  muestraPuntuacion();
+  mostrarCarta(0);
+  mostrarBotonNuevaPartida(false);
+  mostrarBotonQuePasaria(false);
+  ajustesNuevaPartida();
+}
 // Eventos
-if (botonPideCarta) {
+if (botonPideCarta instanceof HTMLButtonElement) {
   botonPideCarta.addEventListener("click", pedirCarta);
 }
 
-if (botonPlantarse) {
+if (botonPlantarse instanceof HTMLButtonElement) {
   botonPlantarse.addEventListener("click", plantarse);
 }
 
-if (botonNuevaPartida) {
+if (botonNuevaPartida instanceof HTMLButtonElement) {
   botonNuevaPartida.addEventListener("click", nuevaPartida);
+}
+if (botonQueHabriaPasado instanceof HTMLButtonElement) {
+  botonQueHabriaPasado.addEventListener("click", verQueHabriaPasado);
 }
 
 // Ocultar el botón para una nueva partida al inicio
 mostrarBotonNuevaPartida(false);
+mostrarBotonQuePasaria(false);
