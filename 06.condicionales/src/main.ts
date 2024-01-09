@@ -3,42 +3,17 @@ import "./style.css";
 let puntuacionUsuario: number = 0;
 
 // ELEMENTOS DEL DOM
-const botonPideCarta = getElemento(
-  "pedir_carta",
-  "button"
-) as HTMLButtonElement;
-const imgCarta = getElemento("carta", "img") as HTMLImageElement;
-const puntuacion = getElemento("mostrar_puntos", "div");
-const mensajes = getElemento("mostrar_mensaje", "div");
-const botonPlantarse = getElemento("plantarse", "button") as HTMLButtonElement;
-const botonNuevaPartida = getElemento("nueva_partida", "button");
-const botonQueHabriaPasado = getElemento("post-plantarse", "button");
-
-// Función para obtener elementos del DOM y hacer comprobaciones
-function getElemento(id: string, tipo: string): HTMLElement {
-  const elemento = document.getElementById(id);
-  if (!elemento) {
-    throw new Error(`Elemento con id ${id} no encontrado.`);
-  }
-
-  if (!(elemento instanceof HTMLButtonElement) && tipo === "button") {
-    throw new Error(`Elemento con id ${id} no es un botón.`);
-  }
-
-  if (!(elemento instanceof HTMLImageElement) && tipo === "img") {
-    throw new Error(`Elemento con id ${id} no es una imagen.`);
-  }
-
-  if (!(elemento instanceof HTMLDivElement) && tipo === "div") {
-    throw new Error(`Elemento con id ${id} no es un div.`);
-  }
-
-  return elemento;
-}
+const botonPideCarta = document.getElementById("pedir_carta");
+const imgCarta = document.getElementById("carta");
+const puntuacion = document.getElementById("mostrar_puntos");
+const mensajes = document.getElementById("mostrar_mensaje");
+const botonPlantarse = document.getElementById("plantarse");
+const botonNuevaPartida = document.getElementById("nueva_partida");
+const botonQueHabriaPasado = document.getElementById("post-plantarse");
 
 // Función para mostrar la puntuación
 function muestraPuntuacion() {
-  if (puntuacion) {
+  if (puntuacion !== null && puntuacion !== undefined) {
     puntuacion.innerHTML = puntuacionUsuario.toString();
   }
 }
@@ -99,7 +74,13 @@ function elegirUrl(carta: number): string {
 
 // Función para meter la URL en el src de la imagen
 function meteUrl(url: string) {
-  imgCarta.src = url;
+  if (
+    imgCarta !== null &&
+    imgCarta !== undefined &&
+    imgCarta instanceof HTMLImageElement
+  ) {
+    imgCarta.src = url;
+  }
 }
 
 // Función para mostrar la carta
@@ -122,8 +103,8 @@ function obtenerCartaAleatoria(): number {
   return cartaAleatoria;
 }
 
-//Funcion para sumar puntos
-function sumaPuntos(carta: number): number {
+//Funcion para obtener puntos
+function obtenerPuntos(carta: number): number {
   let puntos: number;
   if (carta >= 1 && carta <= 7) {
     puntos = carta;
@@ -133,24 +114,37 @@ function sumaPuntos(carta: number): number {
   return puntos;
 }
 
-// Función para meter puntos en puntuacion usuario
-function sumarPuntosUsuario(carta: number) {
-  puntuacionUsuario += sumaPuntos(carta);
+//Funcion para sumar los puntos
+function sumarPuntos(puntos: number): number {
+  return puntuacionUsuario + puntos;
+}
+
+//Asignar los puntos al usuario
+function asignaPuntos(puntos: number) {
+  puntuacionUsuario = puntos;
 }
 
 // Función para deshabilitar botones
 function deshabilitarBotones() {
-  if (botonPideCarta) {
+  if (
+    botonPideCarta !== null &&
+    botonPideCarta !== undefined &&
+    botonPideCarta instanceof HTMLButtonElement
+  ) {
     botonPideCarta.disabled = true;
   }
-  if (botonPlantarse) {
+  if (
+    botonPlantarse !== null &&
+    botonPlantarse !== undefined &&
+    botonPlantarse instanceof HTMLButtonElement
+  ) {
     botonPlantarse.disabled = true;
   }
 }
 
 // Función para mostrar mensaje
 function mostrarMensaje(mensaje: string, esError: boolean = false) {
-  if (mensajes) {
+  if (mensajes !== null && mensajes !== undefined) {
     mensajes.innerHTML = mensaje;
     if (esError) {
       mensajes.classList.add("error");
@@ -162,14 +156,22 @@ function mostrarMensaje(mensaje: string, esError: boolean = false) {
 
 // Función para mostrar el botón de nueva partida
 function mostrarBotonNuevaPartida(mostrar: boolean) {
-  if (botonNuevaPartida) {
+  if (
+    botonNuevaPartida !== null &&
+    botonNuevaPartida !== undefined &&
+    botonNuevaPartida instanceof HTMLButtonElement
+  ) {
     botonNuevaPartida.style.display = mostrar ? "block" : "none";
   }
 }
 
 // Función para mostrar el botón de que habria pasado
 function mostrarBotonQuePasaria(mostrar: boolean) {
-  if (botonQueHabriaPasado) {
+  if (
+    botonQueHabriaPasado !== null &&
+    botonQueHabriaPasado !== undefined &&
+    botonQueHabriaPasado instanceof HTMLButtonElement
+  ) {
     botonQueHabriaPasado.style.display = mostrar ? "block" : "none";
   }
 }
@@ -195,7 +197,10 @@ function comprobarPuntosUsuario() {
 // Función principal para pedir carta
 function pedirCarta() {
   const cartaAleatoria = obtenerCartaAleatoria();
-  sumarPuntosUsuario(cartaAleatoria);
+  const puntosCarta = obtenerPuntos(cartaAleatoria);
+  const nuevaPuntuacion = sumarPuntos(puntosCarta);
+  asignaPuntos(nuevaPuntuacion);
+  obtenerPuntos(cartaAleatoria);
   mostrarCarta(cartaAleatoria);
   muestraPuntuacion();
   comprobarPuntosUsuario();
@@ -227,15 +232,23 @@ function plantarse() {
 
 //funciona para establecer ajustes de nueva partida
 function ajustesNuevaPartida() {
-  if (mensajes) {
+  if (mensajes !== null && mensajes !== undefined) {
     mensajes.innerHTML = "";
     mensajes.classList.remove("error");
   }
 
-  if (botonPideCarta) {
+  if (
+    botonPideCarta !== null &&
+    botonPideCarta !== undefined &&
+    botonPideCarta instanceof HTMLButtonElement
+  ) {
     botonPideCarta.disabled = false;
   }
-  if (botonPlantarse) {
+  if (
+    botonPlantarse !== null &&
+    botonPlantarse !== undefined &&
+    botonPlantarse instanceof HTMLButtonElement
+  ) {
     botonPlantarse.disabled = false;
   }
 }
@@ -250,18 +263,34 @@ function nuevaPartida() {
   ajustesNuevaPartida();
 }
 // Eventos
-if (botonPideCarta instanceof HTMLButtonElement) {
+if (
+  botonPideCarta !== null &&
+  botonPideCarta !== undefined &&
+  botonPideCarta instanceof HTMLButtonElement
+) {
   botonPideCarta.addEventListener("click", pedirCarta);
 }
 
-if (botonPlantarse instanceof HTMLButtonElement) {
+if (
+  botonPlantarse !== null &&
+  botonPlantarse !== undefined &&
+  botonPlantarse instanceof HTMLButtonElement
+) {
   botonPlantarse.addEventListener("click", plantarse);
 }
 
-if (botonNuevaPartida instanceof HTMLButtonElement) {
+if (
+  botonNuevaPartida !== null &&
+  botonNuevaPartida !== undefined &&
+  botonNuevaPartida instanceof HTMLButtonElement
+) {
   botonNuevaPartida.addEventListener("click", nuevaPartida);
 }
-if (botonQueHabriaPasado instanceof HTMLButtonElement) {
+if (
+  botonQueHabriaPasado !== null &&
+  botonQueHabriaPasado !== undefined &&
+  botonQueHabriaPasado instanceof HTMLButtonElement
+) {
   botonQueHabriaPasado.addEventListener("click", verQueHabriaPasado);
 }
 
