@@ -13,7 +13,11 @@ const botonQueHabriaPasado = document.getElementById("post-plantarse");
 
 // Función para mostrar la puntuación
 function muestraPuntuacion() {
-  if (puntuacion !== null && puntuacion !== undefined) {
+  if (
+    puntuacion !== null &&
+    puntuacion !== undefined &&
+    puntuacion instanceof HTMLDivElement
+  ) {
     puntuacion.innerHTML = puntuacionUsuario.toString();
   }
 }
@@ -95,12 +99,11 @@ function generarNumero(): number {
 }
 
 // Función para obtener una carta aleatoria
-function obtenerCartaAleatoria(): number {
-  let cartaAleatoria: number = generarNumero();
-  if (cartaAleatoria > 7) {
-    cartaAleatoria += 2;
+function obtenerCartaAleatoria(numeroAleatorio: number): number {
+  if (numeroAleatorio > 7) {
+    numeroAleatorio += 2;
   }
-  return cartaAleatoria;
+  return numeroAleatorio;
 }
 
 //Funcion para obtener puntos
@@ -196,7 +199,8 @@ function comprobarPuntosUsuario() {
 
 // Función principal para pedir carta
 function pedirCarta() {
-  const cartaAleatoria = obtenerCartaAleatoria();
+  const numeroAleatorio = generarNumero();
+  const cartaAleatoria = obtenerCartaAleatoria(numeroAleatorio);
   const puntosCarta = obtenerPuntos(cartaAleatoria);
   const nuevaPuntuacion = sumarPuntos(puntosCarta);
   asignaPuntos(nuevaPuntuacion);
