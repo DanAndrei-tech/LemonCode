@@ -204,7 +204,7 @@ function pedirCarta() {
   const puntosCarta = obtenerPuntos(cartaAleatoria);
   const nuevaPuntuacion = sumarPuntos(puntosCarta);
   asignaPuntos(nuevaPuntuacion);
-  obtenerPuntos(cartaAleatoria);
+
   mostrarCarta(cartaAleatoria);
   muestraPuntuacion();
   comprobarPuntosUsuario();
