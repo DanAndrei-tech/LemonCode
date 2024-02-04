@@ -3,12 +3,12 @@ import {
   botonPlantarse,
   botonNuevaPartida,
   botonQueHabriaPasado,
-  mostrarBotonNuevaPartida,
-  mostrarBotonQuePasaria,
   plantarse,
   nuevaPartida,
   pedirCarta,
   verQueHabriaPasado,
+  deshabilitaVerQuePasaria,
+  iniciaPartida,
 } from "./ui";
 
 // Eventos
@@ -43,6 +43,15 @@ if (
   botonQueHabriaPasado.addEventListener("click", verQueHabriaPasado);
 }
 
+if (
+  botonQueHabriaPasado !== null &&
+  botonQueHabriaPasado !== undefined &&
+  botonQueHabriaPasado instanceof HTMLButtonElement
+) {
+  botonQueHabriaPasado.addEventListener("click", () => {
+    deshabilitaVerQuePasaria(true);
+  });
+}
+
 // Ocultar el botón para una nueva partida al inicio
-mostrarBotonNuevaPartida(false);
-mostrarBotonQuePasaria(false);
+document.addEventListener("DOMContentLoaded", iniciaPartida);

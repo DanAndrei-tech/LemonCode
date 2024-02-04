@@ -105,10 +105,24 @@ export function pedirCarta() {
   const puntosCarta = obtenerPuntos(cartaAleatoria);
   const nuevaPuntuacion = sumarPuntos(puntosCarta);
   asignaPuntos(nuevaPuntuacion);
-
   mostrarCarta(cartaAleatoria);
   muestraPuntuacion();
   comprobarPuntosUsuario();
+}
+
+//Funcion para deshabilitar ver que pasa
+export function deshabilitaVerQuePasaria(estado: boolean = true) {
+  if (
+    botonQueHabriaPasado !== null &&
+    botonQueHabriaPasado !== undefined &&
+    botonQueHabriaPasado instanceof HTMLButtonElement
+  ) {
+    if (estado) {
+      botonQueHabriaPasado.disabled = true;
+    } else {
+      botonQueHabriaPasado.disabled = false;
+    }
+  }
 }
 
 // Función para deshabilitar botones
@@ -131,7 +145,11 @@ export function deshabilitarBotones() {
 
 // Función para mostrar mensaje
 export function mostrarMensaje(mensaje: string, esError: boolean = false) {
-  if (mensajes !== null && mensajes !== undefined) {
+  if (
+    mensajes !== null &&
+    mensajes !== undefined &&
+    mensajes instanceof HTMLDivElement
+  ) {
     mensajes.innerHTML = mensaje;
     if (esError) {
       mensajes.classList.add("error");
@@ -230,10 +248,16 @@ export function nuevaPartida() {
   mostrarCarta(0);
   mostrarBotonNuevaPartida(false);
   mostrarBotonQuePasaria(false);
+  deshabilitaVerQuePasaria(false);
   ajustesNuevaPartida();
 }
 
 //Funcion para saber que habria pasado
 export function verQueHabriaPasado() {
   pedirCarta();
+}
+
+export function iniciaPartida() {
+  mostrarBotonNuevaPartida(false);
+  mostrarBotonQuePasaria(false);
 }
