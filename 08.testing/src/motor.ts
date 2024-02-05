@@ -1,15 +1,16 @@
-import { partida } from "./model";
+import { EstadoPartida, partida } from "./model";
 
 //--------------------------FUNCIONES PARA TESTING-------------------------//
-//Funcion para probar caso de ganador.
-export function determinarGanador(): string | null {
-  if (partida.puntuacionUsuario === 7.5) {
-    return "¡¡¡Enhorabuena!!!🎉🎉";
-  } else if (partida.puntuacionUsuario > 7.5) {
-    return "Game Over";
+//Funcion para probar casos de puntuacion:.
+export function obtenerEstadoPartida(): EstadoPartida {
+  if (partida.puntuacionUsuario === partida.puntosMaximosTotales) {
+    partida.estado = "JUSTO_MAXIMA";
+  } else if (partida.puntuacionUsuario > partida.puntosMaximosTotales) {
+    partida.estado = "TE HAS PASADO";
   } else {
-    return null;
+    partida.estado = "POR_DEBAJO_MAXIMO";
   }
+  return partida.estado;
 }
 
 // Función para obtener una carta aleatoria
