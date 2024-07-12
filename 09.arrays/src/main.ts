@@ -1,7 +1,5 @@
 import "./style.css";
 
-import "./style.css";
-
 type Especialidad = "Medico de familia" | "Pediatra" | "Cardiólogo";
 
 interface Pacientes {
@@ -172,32 +170,32 @@ interface NumeroPacientesPorEspecialidad {
   cardiologia: number;
 }
 
-const cuentaPacientesPorEspecialidad = (
-  pacientes: Pacientes[]
-): NumeroPacientesPorEspecialidad => {
-  let conteo: NumeroPacientesPorEspecialidad = {
-    medicoDeFamilia: 0,
-    pediatria: 0,
-    cardiologia: 0,
-  };
+const contarPacientesPorEspecialidad = (
+  pacientes: Pacientes[],
+  especialidadObjetivo: string
+): number => {
+  let conteo = 0;
 
   for (let i = 0; i < pacientes.length; i++) {
-    const especialidad = pacientes[i].especialidad;
-
-    switch (especialidad) {
-      case "Medico de familia":
-        conteo.medicoDeFamilia++;
-        break;
-      case "Cardiólogo":
-        conteo.cardiologia++;
-        break;
-      case "Pediatra":
-        conteo.pediatria++;
-        break;
+    if (pacientes[i].especialidad === especialidadObjetivo) {
+      conteo++;
     }
   }
 
   return conteo;
+};
+
+const cuentaPacientesPorEspecialidad = (
+  pacientes: Pacientes[]
+): NumeroPacientesPorEspecialidad => {
+  return {
+    medicoDeFamilia: contarPacientesPorEspecialidad(
+      pacientes,
+      "Medico de familia"
+    ),
+    pediatria: contarPacientesPorEspecialidad(pacientes, "Pediatra"),
+    cardiologia: contarPacientesPorEspecialidad(pacientes, "Cardiólogo"),
+  };
 };
 
 console.log(cuentaPacientesPorEspecialidad(pacientes));
