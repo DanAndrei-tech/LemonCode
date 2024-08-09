@@ -106,7 +106,7 @@ button:focus-visible {
 .tablero {
   display: grid;
   grid-template-columns: repeat(4, 100px);
-  gap: 10px;
+  gap: 20px;
 }
 
 .carta {

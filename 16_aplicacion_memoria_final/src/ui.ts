@@ -1,7 +1,13 @@
-// src/ui.ts
-
 import { Tablero } from "./modelo";
-import { voltearLaCarta, reiniciarJuego } from "./motor";
+import {
+  voltearLaCarta,
+  reiniciarJuego,
+  sePuedeVoltearLaCarta,
+  sonPareja,
+  esPartidaCompleta,
+  parejaEncontrada,
+  parejaNoEncontrada,
+} from "./motor";
 
 export const renderizarTablero = (
   tablero: Tablero,
@@ -48,18 +54,38 @@ const mostrarMensajeFinJuego = (tablero: Tablero) => {
   });
 };
 
+const comprobarSiEsLaSegundaCarta = (tablero: Tablero) => {
+  const indiceCartaA = tablero.indiceCartaVolteadaA;
+  const indiceCartaB = tablero.indiceCartaVolteadaB;
+
+  if (indiceCartaA !== undefined && indiceCartaB !== undefined) {
+    if (sonPareja(indiceCartaA, indiceCartaB, tablero)) {
+      parejaEncontrada(tablero, indiceCartaA, indiceCartaB);
+      if (esPartidaCompleta(tablero)) {
+        tablero.estadoPartida = "PartidaCompleta";
+        setTimeout(() => {
+          mostrarMensajeFinJuego(tablero);
+        }, 500);
+      } else {
+        tablero.estadoPartida = "CeroCartasLevantadas";
+      }
+    } else {
+      parejaNoEncontrada(tablero, indiceCartaA, indiceCartaB);
+      // llamo a mi función que le de la vuelta a las cartas que no son pareja
+      // con el setTimeout
+      // NOTA: le tengo que dar la vuelta (mostrar el fondo trasero), a las cartas, que no estén encontradas ni están dadas la vuelta.
+    }
+  }
+};
+
 // Ajustamos manejarClickCarta para que acepte solo el índice y use la función del motor
 export const manejarClickCarta =
   (tablero: Tablero) =>
   (indice: number): void => {
-    voltearLaCarta(tablero, indice);
-    const tableroElement = document.getElementById("tablero")!;
-    renderizarTablero(tablero, tableroElement, manejarClickCarta(tablero));
-
-    //verificar si la partida esta completa
-    if (tablero.estadoPartida === "PartidaCompleta") {
-      setTimeout(() => {
-        mostrarMensajeFinJuego(tablero);
-      }, 1000);
+    if (sePuedeVoltearLaCarta(tablero, indice)) {
+      voltearLaCarta(tablero, indice);
+      const tableroElement = document.getElementById("tablero")!;
+      renderizarTablero(tablero, tableroElement, manejarClickCarta(tablero));
+      comprobarSiEsLaSegundaCarta(tablero);
     }
   };
