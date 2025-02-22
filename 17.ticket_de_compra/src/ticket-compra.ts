@@ -13,6 +13,9 @@ import {
 } from "./ticket-compra-helper";
 
 export const calculaTicket = (lineasTicket: LineaTicket[]): TicketFinal => {
+  if (!lineasTicket) {
+    throw new Error("Entrada no válida");
+  }
   let totalSinIva = 0;
   let totalConIva = 0;
   let totalIva = 0;

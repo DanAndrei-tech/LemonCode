@@ -13,6 +13,9 @@ export const calcularPrecioConIva = (
   precio: number,
   tipoIva: TipoIva
 ): number => {
+  if (!precio || !tipoIva) {
+    throw new Error("Entrada no válida");
+  }
   return Number((precio * (1 + IVA_PORCENTAJES[tipoIva] / 100)).toFixed(2));
 };
 
@@ -22,6 +25,10 @@ const actualizarDesgloseIva = (
   tipoIva: TipoIva,
   iva: number
 ) => {
+  if (!desgloseIva || !tipoIva || iva) {
+    throw new Error("Entrada no válida");
+  }
+
   if (!desgloseIva[tipoIva]) {
     desgloseIva[tipoIva] = 0;
   }
@@ -32,6 +39,9 @@ export const calculaPrecioSinIva = (
   precio: number,
   cantidad: number
 ): number => {
+  if (!precio || !cantidad) {
+    throw new Error("Entrada no válida");
+  }
   return precio * cantidad;
 };
 
@@ -39,5 +49,8 @@ export const calcularIva = (
   precioConIva: number,
   precioSinIva: number
 ): number => {
+  if (!precioConIva || !precioSinIva) {
+    throw new Error("Entrada no válida");
+  }
   return precioConIva - precioSinIva;
 };
