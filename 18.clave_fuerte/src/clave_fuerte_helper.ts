@@ -1,6 +1,10 @@
 import { ValidacionClave } from "./modelo";
 
 export const tieneMayusculasYminusculas = (clave: string): ValidacionClave => {
+  if (!clave) {
+    throw new Error("Entrada no válida");
+  }
+
   let tieneMayuscula = false;
   let tieneMinuscula = false;
 
@@ -24,6 +28,9 @@ export const tieneMayusculasYminusculas = (clave: string): ValidacionClave => {
 };
 
 export const tieneNumeros = (clave: string): ValidacionClave => {
+  if (!clave) {
+    throw new Error("Entrada no válida");
+  }
   for (const char of clave) {
     if (!isNaN(Number(char))) {
       return { esValida: true };
@@ -37,6 +44,9 @@ export const tieneNumeros = (clave: string): ValidacionClave => {
 };
 
 export const tieneCaracteresEspeciales = (clave: string): ValidacionClave => {
+  if (!clave) {
+    throw new Error("Entrada no válida");
+  }
   const caracteresEspeciales = [
     "@",
     "#",
@@ -64,6 +74,9 @@ export const tieneCaracteresEspeciales = (clave: string): ValidacionClave => {
 };
 
 export const tieneLongitudMinima = (clave: string): ValidacionClave => {
+  if (!clave) {
+    throw new Error("Entrada no válida");
+  }
   if (clave.length < 8) {
     return {
       esValida: false,
@@ -77,6 +90,9 @@ export const contieneNombreUsuario = (
   nombreUsuario: string,
   clave: string
 ): ValidacionClave => {
+  if (!clave || !nombreUsuario) {
+    throw new Error("Entrada no válida");
+  }
   if (clave.toLowerCase().includes(nombreUsuario.toLowerCase())) {
     return {
       esValida: false,
@@ -90,6 +106,9 @@ export const tienePalabrasComunes = (
   clave: string,
   commonPasswords: string[]
 ): ValidacionClave => {
+  if (!clave || !commonPasswords) {
+    throw new Error("Entrada no válida");
+  }
   if (
     commonPasswords.some((common) =>
       clave.toLowerCase().includes(common.toLowerCase())
