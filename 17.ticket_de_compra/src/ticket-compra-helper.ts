@@ -25,7 +25,7 @@ const actualizarDesgloseIva = (
   tipoIva: TipoIva,
   iva: number
 ) => {
-  if (!desgloseIva || !tipoIva || iva) {
+  if (!desgloseIva || !tipoIva || !iva) {
     throw new Error("Entrada no válida");
   }
 
