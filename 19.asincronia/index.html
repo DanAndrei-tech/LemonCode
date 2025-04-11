@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="src/reseteo.css" />
+    <link rel="stylesheet" href="src/estilos.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <main class="main">
+      <div class="contenedor-h1">
+        <h1 class="cabecera h1">Personajes de Mortadelo y Filemón</h1>
+        <form action="" id="formulario" class="formulario">
+          <input type="text" name="formulario" id="personaje" />
+          <button type="submit">Filtrar</button>
+          <button type="submit" id="home">Ver Todo</button>
+        </form>
+      </div>
+      <div id="listado-personajes" class="listado-personajes"></div>
+    </main>
+    <script type="module" src="./src/personajes-listado.ts"></script>
+  </body>
+</html>
