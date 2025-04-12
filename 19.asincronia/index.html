@@ -15,11 +15,18 @@
         <form action="" id="formulario" class="formulario">
           <input type="text" name="formulario" id="personaje" />
           <button type="submit">Filtrar</button>
-          <button type="submit" id="home">Ver Todo</button>
+          <button type="button" id="home">Volver</button>
         </form>
       </div>
       <div id="listado-personajes" class="listado-personajes"></div>
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span id="popup-close" class="popup-close">&times;</span>
+          <p id="popup-message">Mensaje</p>
+        </div>
+      </div>
     </main>
+
     <script type="module" src="./src/personajes-listado.ts"></script>
   </body>
 </html>

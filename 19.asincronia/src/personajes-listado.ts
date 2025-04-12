@@ -73,9 +73,13 @@ const pintarPersonajes = async () => {
 const actualizarPersonajes = async () => {
   try {
     const personajes = await obtenerPersonajesFiltrados();
-    renderizarPersonajes(personajes);
+    if (personajes.length === 0) {
+      mostrarPopup("No existe ningún personaje con ese nombre");
+    } else {
+      renderizarPersonajes(personajes);
+    }
   } catch (error) {
-    throw new Error("Error");
+    throw new Error("Error al cargar los personajes");
   }
 };
 
@@ -88,6 +92,21 @@ const volverAlaPaginaDeInicio = () => {
       if (input) input.value = "";
     });
   }
+};
+
+const mostrarPopup = (mensaje: string) => {
+  const popup = document.getElementById("popup") as HTMLDivElement;
+  const popupMessage = document.getElementById(
+    "popup-message"
+  ) as HTMLParagraphElement;
+
+  popupMessage.textContent = mensaje; // Actualizamos el mensaje en el popup
+  popup.style.display = "flex"; // Mostramos el popup
+
+  const closeBtn = document.getElementById("popup-close") as HTMLElement;
+  closeBtn.addEventListener("click", () => {
+    popup.style.display = "none"; // Cerramos el popup cuando se hace clic en el botón de cerrar
+  });
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
