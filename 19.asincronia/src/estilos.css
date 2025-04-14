@@ -91,12 +91,13 @@ textarea {
 
 .listado-personajes {
   display: grid;
-  grid-template-columns: repeat(3, minmax(100px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px;
 }
 
 .personaje-contenedor {
+  position: relative;
   border: 2px solid #ccc;
   border-radius: 10px;
   padding: 16px;

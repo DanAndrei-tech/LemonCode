@@ -1,6 +1,6 @@
 import { Personaje } from "./personajes-modelo";
 import { obtenerPersonajes } from "./personajes-listado.api";
-import { obtenerPersonajesFiltrados } from "./personaje-filtro";
+import { obtenerPersonajesFiltrados } from "./personajes-listado.api";
 
 const crearElementoImagen = (
   portada: string,
@@ -51,6 +51,15 @@ const crearContenedorPersonaje = (personaje: Personaje): HTMLDivElement => {
   return elementoPersonaje;
 };
 
+const obtenerValorInput = (input: string): string => {
+  const elementoInput = document.querySelector(`#${input}`);
+  if (elementoInput && elementoInput instanceof HTMLInputElement) {
+    return elementoInput.value;
+  } else {
+    throw new Error(`No se ha encontrado el input ${input}`);
+  }
+};
+
 const renderizarPersonajes = (personajes: Personaje[]): void => {
   const listado = document.querySelector("#listado-personajes");
 
@@ -72,7 +81,8 @@ const pintarPersonajes = async () => {
 
 const actualizarPersonajes = async () => {
   try {
-    const personajes = await obtenerPersonajesFiltrados();
+    const nombre = obtenerValorInput("personaje");
+    const personajes = await obtenerPersonajesFiltrados(nombre);
     if (personajes.length === 0) {
       mostrarPopup("No existe ningún personaje con ese nombre");
     } else {
