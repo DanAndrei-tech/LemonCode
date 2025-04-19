@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="src/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div class="iban">
+      <h1>Introduzca el IBAN</h1>
+      <div class="input-container">
+        <input
+          type="text"
+          id="iban"
+          placeholder="ES00 0000 0000 0000 0000 0000"
+        />
+        <button id="buscar" class="boton-lupa" aria-label="Buscar IBAN">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="datos"></div>
+      <button id="limpiar">Limpiar</button>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
