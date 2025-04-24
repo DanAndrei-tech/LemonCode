@@ -1,10 +1,10 @@
 import { Reserva } from "./modelo";
 
 export class ReservaBase {
-  protected reservas: Reserva[];
-  protected precios: Record<string, number>;
-  protected IVA: number = 0.21;
-  protected DESAYUNO_PRECIO: number = 15;
+  reservas: Reserva[];
+  precios: Record<string, number>;
+  IVA: number = 0.21;
+  DESAYUNO_PRECIO: number = 15;
 
   constructor(reservas: Reserva[], precios: Record<string, number>) {
     this.reservas = reservas;

@@ -2,7 +2,7 @@ import { ReservaBase } from "./reserva-base";
 import { Reserva } from "./modelo";
 
 export class ReservaTourOperador extends ReservaBase {
-  private descuento: number = 0.15;
+  descuento: number = 0.15;
 
   constructor(reservas: Reserva[], precios: Record<string, number>) {
     super(reservas, precios);
