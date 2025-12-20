@@ -1,0 +1,4 @@
+.input-error {
+  box-shadow: unset;
+  border-color: var(--error_color);
+}

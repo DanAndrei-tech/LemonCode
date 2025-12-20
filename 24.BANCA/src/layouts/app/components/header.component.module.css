@@ -1,0 +1,44 @@
+.header {
+  background-color: var(--primary_color);
+}
+
+.header > div {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 20px 20px;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-logo {
+  width: 200px;
+}
+
+.usuario {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.usuario p:before {
+  content: "";
+  background: url(assets/icon-user.svg) no-repeat center center;
+  width: 40px;
+  height: 15px;
+  position: relative;
+  left: 0;
+  top: 0;
+  padding-right: 20px;
+  margin-right: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  header > div {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+}
