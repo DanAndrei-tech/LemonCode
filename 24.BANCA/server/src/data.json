@@ -23,6 +23,14 @@
       "name": "Ahorro",
       "balance": 8500,
       "lastTransaction": "2019-11-15T08:29:04"
+    },
+    {
+      "iban": "SM12 U970 0260 0579 85A6 9909 035",
+      "name": "Corriente",
+      "type": "1",
+      "balance": 0,
+      "lastTransaction": "2026-01-03T22:52:01.620Z",
+      "id": "MYnxFBh"
     }
   ],
   "movements": [
@@ -108,5 +116,17 @@
       "accountId": "3"
     }
   ],
-  "transfer": []
+  "transfer": [
+    {
+      "accountId": "1",
+      "iban": "ES9121000418450200051332",
+      "name": "Andrei Detesan",
+      "amount": "250",
+      "concept": "servicio web",
+      "notes": "",
+      "transferDate": "Fri Jan 02 2026",
+      "realTransferDate": "",
+      "id": 1
+    }
+  ]
 }

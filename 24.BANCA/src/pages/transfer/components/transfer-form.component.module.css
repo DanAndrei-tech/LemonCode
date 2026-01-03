@@ -1,0 +1,63 @@
+.error {
+  color: var(--error_color);
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}
+
+.account-select {
+  width: 200px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid var(--secondary_color);
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.header-container h1 {
+  font-size: 2.2rem;
+  font-weight: 300;
+}
+
+.form-container {
+  border: none;
+  border-bottom: 1px solid var(--secondary_color);
+  padding: 40px 0;
+}
+
+.form-container p {
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}
+
+.form-container div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.form-container div p {
+  margin: 0 10px;
+}
+
+.form-container label {
+  margin-right: 20px;
+  min-width: 300px;
+  text-align: right;
+}
+
+.button {
+  margin: 10px 0 10px 350px;
+}
+
+.large {
+  width: 400px;
+}
+
+.small {
+  width: 100px;
+}

@@ -1,3 +1,4 @@
+import { TransferFieldMessages } from "@/common/validations/validation.const";
 import { validateForm } from "./login.validation";
 import { Credentials } from "./login.vm";
 
@@ -30,7 +31,7 @@ describe("pages/login/login.validation.ts", () => {
 
     //Assert
     expect(result.succeeded).toBeFalsy();
-    expect(result.errors.user).toEqual("Debe informar el campo usuario");
+    expect(result.errors.user).toEqual(TransferFieldMessages.REQUIRED);
     expect(result.errors.password).toEqual("");
   });
 
@@ -46,7 +47,7 @@ describe("pages/login/login.validation.ts", () => {
 
     //Assert
     expect(result.succeeded).toBeFalsy();
-    expect(result.errors.user).toEqual("Debe informar el campo usuario");
-    expect(result.errors.password).toEqual("Debe informar el campo password");
+    expect(result.errors.user).toEqual(TransferFieldMessages.REQUIRED);
+    expect(result.errors.password).toEqual(TransferFieldMessages.REQUIRED);
   });
 });

@@ -1,0 +1,93 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid var(--secondary_color);
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.header-container h1 {
+  font-size: 2.2rem;
+  font-weight: 300;
+}
+
+/* -------- FORM GENERAL -------- */
+.form {
+  margin-top: 30px;
+}
+
+/* -------- CONTENEDOR DEL FORM -------- */
+.formContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* -------- FILAS LABEL + INPUT -------- */
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.row label {
+  width: 200px;
+  text-align: right;
+  margin-right: 20px;
+  font-size: 1rem;
+}
+
+.row input,
+.row select {
+  height: 36px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* -------- INPUT SIZES -------- */
+.large {
+  width: 300px;
+}
+
+.accountSelect {
+  width: 200px;
+}
+
+/* -------- ERRORES -------- */
+.error {
+  color: var(--error_color);
+  font-size: 0.85rem;
+  margin-left: 220px;
+  margin-bottom: 10px;
+}
+
+/* -------- SEPARADOR -------- */
+.separator {
+  border-bottom: 1px solid var(--secondary_color);
+  margin: 30px auto;
+  width: 80%;
+}
+
+/* -------- BOTÓN -------- */
+.button {
+  background-color: var(--primary_color);
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+/* -------- CENTRADO -------- */
+.center {
+  display: flex;
+  justify-content: center;
+}

@@ -7,6 +7,7 @@ import {
   TransferPage,
 } from "@/pages";
 import { appRoutes } from "./routes";
+import { AddAccountPage } from "@/pages/add-account/add-account.page";
 
 export const Router = () => {
   return (
@@ -14,6 +15,7 @@ export const Router = () => {
       <Routes>
         <Route path={appRoutes.root} element={<LoginPage />} />
         <Route path={appRoutes.accountList} element={<AccountListPage />} />
+        <Route path={appRoutes.addAccount} element={<AddAccountPage />} />
         <Route path={appRoutes.editAccount} element={<AccountPage />} />
         <Route path={appRoutes.movements} element={<MovementListPage />} />
         <Route path={appRoutes.transfer} element={<TransferPage />} />
