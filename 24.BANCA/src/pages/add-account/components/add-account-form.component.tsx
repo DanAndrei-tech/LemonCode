@@ -49,7 +49,8 @@ export const AddAccountFormComponent: React.FC<Props> = (props) => {
           >
             <option value="">Seleccionar</option>
             <option value="1">Cuenta corriente</option>
-            <option value="2">Cuenta ahorro</option>
+            <option value="2">Cuenta de ahorro</option>
+            <option value="3">Cuenta de Nómina</option>
           </select>
         </div>
         <p className={classes.error}>{errors.type}</p>
